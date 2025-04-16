@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Configure CORS
 CORS(app, resources={
     r"/trigger-flow": {
-        "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
+        "origins": ["https://unlimitedautomation.netlify.app"],
         "methods": ["POST"],
         "allow_headers": ["Content-Type"]
     }
