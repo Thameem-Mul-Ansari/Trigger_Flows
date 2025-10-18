@@ -15,7 +15,7 @@ app = Flask(__name__)
 # Enable CORS for your React frontend
 CORS(app, resources={
     r"/trigger-flow": {
-        # "origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
+        #"origins": ["http://localhost:5173", "http://127.0.0.1:5173"],
         "origins": ["https://unlimitedautomation.netlify.app"],
         "methods": ["POST"],
         "allow_headers": ["Content-Type"]
@@ -29,7 +29,10 @@ PRODUCT_FLOW_MAPPING = {
     "flow_03": "CUSTOMER_FEEDBACK_FLOW_URL",
     "flow_04": "RESUME_SCREEN_FLOW_URL",
     "flow_05": "INVOICE_PROCESSING_FLOW_URL",
-    "flow_06": "WEB_PRICE_FLOW_URL"
+    "flow_06": "WEB_PRICE_FLOW_URL",
+    "flow_07": "LINKEDIN_FLOW_URL",
+    "flow_13": "ID_CARD_FLOW_URL",
+    "flow_14": "PRODUCT_WARRANTY_FLOW_URL"
 }
 
 @app.route('/trigger-flow', methods=['POST'])
@@ -81,6 +84,15 @@ def trigger_flow():
         if product_id == "flow_06":
             payload["extraField6"] = data.get("extraField6")
             payload["extraField5"] = data.get("extraField5")
+
+        if product_id == "flow_07":
+            payload["extraField9"] = data.get("extraField9")
+
+        if product_id == "flow_14":
+            payload["extraField7"] = data.get("extraField7")
+        
+        if product_id == "flow_13":
+            payload["extraField8"] = data.get("extraField8")
 
         # Send the payload to Power Automate flow
         response = requests.post(flow_url, json=payload, timeout=1400)
